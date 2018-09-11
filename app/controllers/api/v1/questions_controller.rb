@@ -1,7 +1,15 @@
-class Api::V1::QuestionsController < ApplicationController
+class Api::V1::QuestionsController < ApiController
+ 
+    def index
+        
+        @questions = Question.all
+    end
+
+    
     def create
-        binding.pry
+        
         question = Question.new(question_params)
+        question.user = set_user
         if question.save
             @question = question
             render 'api/v1/questions/show'
@@ -12,7 +20,11 @@ class Api::V1::QuestionsController < ApplicationController
     private
 
     def question_params
-
-        params.require(:question, :user_id).permit(:title, :body)
+    
+        
+        params.require(:question).permit(:title, :body, :user_id)
+    end
+    def set_user
+        @user = User.find(params[:user_id])
     end
 end

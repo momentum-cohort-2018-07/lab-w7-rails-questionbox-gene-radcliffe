@@ -1,9 +1,9 @@
 class CreateAnswers < ActiveRecord::Migration[5.2]
   def change
     create_table :answers do |t|
-      t.string :title
-      t.text :body
-      t.datetime :published_date
+      t.string :answerable_type
+      t.integer :answerable_id
+      t.integer :question_id
 
       t.timestamps
     end
