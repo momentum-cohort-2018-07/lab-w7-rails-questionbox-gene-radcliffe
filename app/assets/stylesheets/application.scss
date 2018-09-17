@@ -13,3 +13,35 @@
  *
  */
  @import "bootstrap";
+ @import url('https://fonts.googleapis.com/css?family=Palanquin+Dark');
+
+ .header{
+     background-color: #EFFFFA;
+ }
+
+ .question-box{
+     font-family: 'Palanquin Dark', sans-serif;
+ }
+
+ .header-row{
+     padding: 5px;
+   
+ }
+ 
+ .nav{
+     margin-top: 0.5rem;
+     margin-bottom: 0.5rem;
+   
+ }
+ .nav-item{
+     margin-left: 0.5rem;
+ }
+
+ .signup-error__no--display{
+     display: none;
+ }
+ .signup-error__display{
+    display: block;
+
+ }
+

@@ -10,6 +10,37 @@
   </head>
 
   <body>
+  <div class="header container-fluid">
+    <div class="row header-row">
+        <section class="col-9 header-hero__title header-col">
+            <h1 class="question-box">Question Box</h1>
+        </section>
+        <section class="col-3 header-hero__nav header-col">
+            <ul class="nav-box nav">
+                    <li class="nav-item ">
+                        <a href="http://localhost:3000/questions/question">New Question</a>
+                    </li>
+                <% if !session[:user_id]%>
+                    <li class="nav-item nav-login" >
+                    <a href= "http://localhost:3000/sessions/login" >Login</a>
+                    </li>
+                <%end%>
+                <% if !session[:user_id]%>
+                    <li class="nav-item nav-signup">
+                    <a href= "http://localhost:3000/users/signup"  class="badge badge-pill badge-primary">Signup</a>
+                    </li>
+                <%end%>
+                <% if session[:user_id]%>
+                    <li class="nav-item nav-name"><a href="/users/show">User: <%=session[:username]%></a></li>
+                <%end%>
+                 <% if session[:user_id]%>
+    
+                    <li class="nav-item nav-logout"><%=link_to  "Logout", sessions_destroy_path  %></li>
+                <%end%>
+            </ul>
+        </section>
+    </div>
+</div>
     <%= yield %>
   </body>
 </html>

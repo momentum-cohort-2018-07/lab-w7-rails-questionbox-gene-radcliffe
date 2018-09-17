@@ -1,0 +1,22 @@
+
+<div class="card mx-auto col-8 mt-5">
+    <div class="card-header row">
+        <h3 class="mx-auto">Profile</h3>
+    </div>
+    <div class="card-body">
+       <div class="row">
+        <section class="col-4">
+            <img alt="picture">
+            <h6 class="d-block"><em><%= session[:username]%></em></h6>
+        </section>
+        <section class="col-8">
+                <p><em>user id: <%= session[:userid]%></em></>
+                <p><em>user name: <%= session[:username]%></em></>
+                 <p><em>member since: <%= session[:joined]%></em></>
+        </section>
+       </div>
+    </div>
+    <div class="card-footer row">
+    </div>
+      
+</div>

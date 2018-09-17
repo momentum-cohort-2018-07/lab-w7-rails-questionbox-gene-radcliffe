@@ -1,0 +1,67 @@
+
+<div class="container">
+  <%question = @question['question']%>
+    <div class="card border-info mb-5">
+        <div class="card-header badge-primary">
+            <h4><%=question["title"]%></h4>
+        </div>
+        <div class="card-body ">
+            <div class="col">
+                <section class="border-info row">
+                  <div>
+                    <%=markdown(question["body"])%>
+                  </div>
+                </section>
+            </div>
+        </div>
+         <section class="p-0 card-footer text-muted">
+            <section class="border-info row">
+                    <section class="col m-2">
+                        <p class="d-block"><em>Asked by: <%=question["username"]%></em></p>
+                        <p class="d-block"><em>tags: </em></p> 
+                        
+                    </section>
+                    <section class="col m-2">
+                        <p class="d-block"><em>published: <%=published_at(question["created_at"])%></em></p>  
+                        <p class="d-block"><em>last update: <%=published_at(question["updated_at"])%></em></p>
+                    </section>
+                    
+            </section>  
+                    <a href="#" class="text-center m-0 d-block badge-info">Answer</a>   
+        </section>
+    </div>
+    <h2>Answers</h2>
+    <div>
+        <% answers = question['answers']%>
+        <% answers.each do |answer| %>
+        <div class="card border-success mb-5">
+            <div class="card-header badge-success">
+                <h4><%=answer["title"]%></h4>
+            </div>
+            <div class="card-body ">
+                <div class="col">
+                    <section class="border-success row">
+                    <p>
+                        <%=markdown(answer["body"])%>
+                    </p>
+                    </section>
+                </div>
+            </div>
+            <section class="card-footer text-muted">
+                <section class="border-success row">
+                        <section class="col">
+                            <p class="d-block"><em>Answer by: <%=answer["posted_by"]%></em></p>
+                            <p class="d-block"><em>tags: </em></p> 
+                            
+                        </section>
+                        <section class="col">
+                            <p class="d-block"><em>posted: <%=published_at(answer["posted"])%></em></p>  
+                            <p class="d-block"><em>last update: <%=published_at(answer["updated_at"])%></em></p>
+                        </section>
+                    </section>          
+            </section>
+        </div>
+
+        <%end%>
+    </div>
+</div>

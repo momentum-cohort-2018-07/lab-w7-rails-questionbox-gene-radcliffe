@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  answerable_type: MyString
+  title: MyString
+  body: MyText
   answerable_id: 1
-  question_id: 1
+  answerable_type: MyString
+  user_id: 1
 
 two:
-  answerable_type: MyString
+  title: MyString
+  body: MyText
   answerable_id: 1
-  question_id: 1
+  answerable_type: MyString
+  user_id: 1
