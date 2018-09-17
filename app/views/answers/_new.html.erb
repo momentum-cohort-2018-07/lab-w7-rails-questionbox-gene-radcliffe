@@ -1,6 +1,7 @@
 <div class="mr-1">                                      
-<%= form_for :question, :method => 'post',  html: {id: 'sub_form_question'},remote: true do %>
+<%= form_for :answer, :method => 'post',  html: {id: 'sub_form_answer'},remote: true do %>
     <div class="form-group"> 
+        <%=hidden_field_tag :param_questionid, params[:question_id], {:id => 'questionid', :name => 'questionid'}%>
         <%=hidden_field_tag :param_name, session[:user_id], {:id => 'userid', :name => 'userid'}%>
         <%=hidden_field_tag :param_token, session[:token], {:id => 'token', :name => 'token'}%>
         <%=hidden_field_tag :param_publish_date, Time.now, {:id => 'publishdate', :name => 'publishdate'}%>
@@ -21,7 +22,7 @@
         </div>
     </div>
      <div class="form-group"> 
-        <%=submit_tag "Create", class: "btn btn-primary btn-small", id:"sub_btn_ask"  %>
+        <%=submit_tag "Submit Answer", class: "btn btn-primary btn-small", id:"sub_btn_answer"  %>
     </div>
 <% end %>
 </div>

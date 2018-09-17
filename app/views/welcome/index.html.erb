@@ -24,7 +24,7 @@
         </div>
          <section class="card-footer text-muted">
                     
-                    <p><em><%=link_to "#{question["answers"]} Answers", new_question_answer_path(question['id'])%></em></p>
+                    <p><em><%=link_to "#{question["answers"]} Answers", question_path(question['id'])%></em></p>
              
         </section>
     </div>

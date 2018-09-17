@@ -1,109 +1,11 @@
 
    $(document).on('turbolinks:load', function() {
-    $('#sub_form_question').submit(function(e){
-        e.preventDefault();
-        
-        var tok = $('#token').val() 
-       // var hash = window.btoa(tok);
-        var ret = "Bearer " + tok;
-        
-        var title = $('#title').val();
-        var body = $('#body').val();
-        var userid = $('#userid').val();
-        var publish_date = $('#publishdate').val()   
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:3007/api/v1/users/"+ userid + "/questions",
-                dataType: 'json',
-                data:   {question: {title: title,
-                                body: body,
-                                publish_date: publish_date}},
-                beforeSend: function (xhr){ 
-                    xhr.setRequestHeader('Authorization', ret); 
-                },
-                success: function (data, status, jqxhr){
-                        if(data.status == "ok"){
-                            window.location.replace("http://localhost:3000/welcome/index") 
-                        }
-                  
-                }
-    
-            })
-        
-        })
-      $('#sub_form').submit(function(e){
-        e.preventDefault()
-        
-            var tok = $('#username').val() + ':' + $('#password').val();
-            var hash = window.btoa(tok);
-            var ret = "Basic " + hash;
-          
-        
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:3007/api/v1/users/login",
-            dataType: 'json',
-            beforeSend: function (xhr){ 
-                xhr.setRequestHeader('Authorization', ret); 
-            },
-            success: function (data, status, jqxhr){
-               if (data.status = "ok"){
-                createSession(data.token,data.username,data.id,data.joined)  
-               }else{
-                   alert("wrong username / password")
-               }
-              
-            },
-            complete: function(jqXHR, status){
-                jqXHR.done(function(data, jqXHR, status){
-                   
-                                             
-                 
-                  
-
-                })
-            }
-
-        });
-
-    })
-    $('#sub_form_signup').submit(function(e){
-        e.preventDefault()
-         var username = $('#username').val();
-         var password = $('#password').val();
-         var email = $('#email').val();
-
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:3007/api/v1/users",
-            dataType: 'json',
-            data:   {user: {username: username,
-                            email: email,
-                            password: password}},
-            beforeSend: function(){
-                //validate form first
-            },
-            success: function (data, status, jqxhr){
-                //redirect to createSession
-               //createSession(data.token)
-                
-                console.log("username: " + data.username)
-               if (data.status == "bad_request"){
-                var errors = data.message
-                    displayWarning(errors)
-                        
-               } 
-               if (data.status == "ok"){
-                
-                    createSession(data.token, data.username, data.id, data.joined)
-                    console.log(data.token)
-               }
-               
-              
-            }
-        });
-
+    newAnswer();
+    createQuestion();
+    login();
+    signup();
     });
+
     function displayWarning(errors){
        
         var warningDiv = document.createElement("div")
@@ -135,6 +37,108 @@
             control.classList.add("is-invalid")
        }
     }
+    function login(){
+      $('#sub_form').submit(function(e){
+        e.preventDefault()
+        
+            var tok = $('#username').val() + ':' + $('#password').val();
+            var hash = window.btoa(tok);
+            var ret = "Basic " + hash;
+          
+        
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3007/api/v1/users/it ",
+            dataType: 'json',
+            beforeSend: function (xhr){ 
+                xhr.setRequestHeader('Authorization', ret); 
+            },
+            success: function (data, status, jqxhr){
+               if (data.status = "ok"){
+                createSession(data.token,data.username,data.id,data.joined)  
+               }else{
+                   alert("wrong username / password")
+               }
+              
+            },
+            complete: function(jqXHR, status){
+                jqXHR.done(function(data, jqXHR, status){
+                
+                })
+            }
+
+        });
+
+    })
+    }
+    function createQuestion(){
+        $('#sub_form_question').submit(function(e){
+            e.preventDefault();
+            
+            var tok = $('#token').val() 
+           // var hash = window.btoa(tok);
+            var ret = "Bearer " + tok;
+            
+            var title = $('#title').val();
+            var body = $('#body').val();
+            var userid = $('#userid').val();
+            var publish_date = $('#publishdate').val()   
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:3007/api/v1/users/"+ userid + "/questions",
+                    dataType: 'json',
+                    data:   {question: {title: title,
+                                    body: body,
+                                    publish_date: publish_date}},
+                    beforeSend: function (xhr){ 
+                        xhr.setRequestHeader('Authorization', ret); 
+                    },
+                    success: function (data, status, jqxhr){
+                            if(data.status == "ok"){
+                                window.location.replace("http://localhost:3000/welcome/index") 
+                            }
+                      
+                    }
+        
+                })
+            
+            })
+    }
+    function newAnswer(){
+        
+        $('#sub_form_answer').submit(function(e){
+            e.preventDefault();
+            alert("answering")
+            var tok = $('#token').val() 
+           // var hash = window.btoa(tok);
+            var ret = "Bearer " + tok;
+            var questionid = $('#questionid').val()
+            var title = $('#title').val();
+            var body = $('#body').val();
+            var userid = $('#userid').val();
+            var publish_date = $('#publishdate').val()  //no need. not in the table. keep Just in Case 
+            $.ajax({
+                type: "POST",              
+                url: "http://localhost:3007/api/v1/questions/"+ questionid + "/answers",
+                dataType: 'json',
+                data:   {answer: {title: title,
+                                body: body,
+                                user_id: userid}},
+                beforeSend: function (xhr){ 
+                    xhr.setRequestHeader('Authorization', ret); 
+                },
+                success: function (data, status, jqxhr){
+                        if(data.status == "ok"){
+                            window.location.replace("http://localhost:3000/questions/"+questionid) 
+                        }
+                  
+                }
+    
+            })  
+            
+        })
+
+    }
     function createSession(token, username, userid, joined){
         $.ajax({
             type: "POST",
@@ -145,6 +149,45 @@
             }     
         })
     }
-   })
+    function signup(){
+        $('#sub_form_signup').submit(function(e){
+            e.preventDefault()
+             var username = $('#username').val();
+             var password = $('#password').val();
+             var email = $('#email').val();
+    
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3007/api/v1/users",
+                dataType: 'json',
+                data:   {user: {username: username,
+                                email: email,
+                                password: password}},
+                beforeSend: function(){
+                    //validate form first
+                },
+                success: function (data, status, jqxhr){
+                    //redirect to createSession
+                   //createSession(data.token)
+                    
+                    console.log("username: " + data.username)
+                   if (data.status == "bad_request"){
+                    var errors = data.message
+                        displayWarning(errors)
+                            
+                   } 
+                   if (data.status == "ok"){
+                    
+                        createSession(data.token, data.username, data.id, data.joined)
+                        console.log(data.token)
+                   }
+                   
+                  
+                }
+            });
+    })
+    }
+  
+
 
    
