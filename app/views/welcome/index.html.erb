@@ -1,0 +1,32 @@
+
+<div class="container pt-5">
+
+
+  <%@questions.each do |questions|%>
+  <%question = questions['question']%>
+    <div class="card border-info mb-5">
+        <div class="card-header badge-primary">
+            <h4><%=question["title"]%></h4>
+        </div>
+        <div class="card-body ">
+            <div class="row">
+                  <section class="border-primary col-6">
+                
+                    <p><em>Asked by: <%=question["username"]%></em></p>
+                    <p><em>minutes ago</em></p>  
+                </section>
+                <section class="border-primary col-6">
+                
+                    <p><em>published: <%=published_at(question["created_at"])%></em></p>  
+                    <p><em>last update: <%=published_at(question["updated_at"])%></em></p>
+                </section>
+            </div>
+        </div>
+         <section class="card-footer text-muted">
+                    
+                    <p><em><%=link_to "#{question["answers"]} Answers", question_path(question['id'])%></em></p>
+             
+        </section>
+    </div>
+  <%end%>
+</div>
