@@ -27,10 +27,14 @@
                     </section>
                     
             </section>  
-                 <%=link_to "Answer", new_question_answer_path(question['id']), :class =>"text-center m-0 d-block badge-info" %>
+                <%if session[:user_id]!= nil%>
+                    <%=link_to "Answer", new_question_answer_path(question['id']), :class =>"text-center m-0 d-block badge-info" %>
+                <%end%>
             </section>
     </div>
+    <%if question["question_answered"] %>
     <h2>Answers</h2>
+    <%end%>
     <div>
         <% answers = question['answers']%>
         <% answers.each do |answer| %>

@@ -1,6 +1,6 @@
 
 class WelcomeController < ApplicationController
- skip_before_action :authenticate
+#  skip_before_action :authenticate
  
 def index
     if session[:user_id]==nil

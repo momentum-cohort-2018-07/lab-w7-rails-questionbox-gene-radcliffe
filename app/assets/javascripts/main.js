@@ -48,7 +48,7 @@
         
         $.ajax({
             type: "GET",
-            url: "http://localhost:3007/api/v1/users/it ",
+            url: "http://localhost:3007/api/v1/users/login",
             dataType: 'json',
             beforeSend: function (xhr){ 
                 xhr.setRequestHeader('Authorization', ret); 

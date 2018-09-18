@@ -67,3 +67,7 @@ gem 'jquery-rails'
 gem 'rack-cors', require: 'rack/cors'
 gem 'httparty'
 gem 'kaminari'
+
+gem 'carrierwave_direct'
+gem "aws-sdk-s3", require: false
+gem 'fog-aws'

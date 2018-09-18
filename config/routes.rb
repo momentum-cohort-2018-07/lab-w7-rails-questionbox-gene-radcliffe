@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  get 'users/signup'
-  get 'users/index'
-  get 'users/show'
+  # get 'users/signup'
+  # get 'users/index'
+  # get 'users/show'
+  # get 'users/new', to: 'user#new' , as: 'new_user'
+
   post 'sessions/create'
   get 'sessions/login'
   get 'sessions/destroy'
   get 'questions/question', to: "questions#question"
-
+resources :avatar, only: [:new, :create]
+resources :users, only: [:create, :new, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'welcome/index'
