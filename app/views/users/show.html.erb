@@ -1,5 +1,5 @@
 
-<div class="card mx-auto col-8 mt-5">
+<div class="card mx-auto col-11 mt-5">
     <div class="card-header row">
         <h3 class="mx-auto">Profile</h3>
     </div>
@@ -9,14 +9,23 @@
             <img alt="picture">
             <h6 class="d-block"><em><%= session[:username]%></em></h6>
         </section>
-        <section class="col-8">
+        <section class="col-4">
                 <p><em>user id: <%= session[:userid]%></em></>
                 <p><em>user name: <%= session[:username]%></em></>
                  <p><em>member since: <%= session[:joined]%></em></>
         </section>
+         <section class="col-4">
+                <p><em>Questions you have asked: <%= @userprofile["user"]["questions_total"]%></em></>
+                <p><em>Questions you have answered: <%= @userprofile["user"]["answers_total"]%></em></>
+        </section>
+       </div>
+       <div class="row">
+        <%=render 'users/userquestions', locals:{ questions: @questions}%>
        </div>
     </div>
     <div class="card-footer row">
+      
+       
     </div>
       
 </div>

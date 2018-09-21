@@ -13,7 +13,9 @@ resources :users, only: [:create, :new, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'welcome/index'
-  resources :questions, only: [:show, :new] do
+  get 'questions/destroy', to: "questions#destroy"
+  resources :searches
+  resources :questions, only: [:show, :new, :edit, :update] do
     resources :answers, only: :new
   end
   

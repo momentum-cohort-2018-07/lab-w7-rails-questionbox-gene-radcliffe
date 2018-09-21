@@ -7,14 +7,16 @@ def index
         
         questions =get_all_answers_unauth
         @questions= questions['questions']
+        
     end
 
     if session[:user_id]!=nil
        
       questions =get_all_answers_unauth
       @questions= questions['questions']
-
+      
     end
+   
   end
 
   private

@@ -1,0 +1,29 @@
+         
+<div class="col">
+<% @user_questions_array = Kaminari.paginate_array(@questions).page(params[:page]).per(10)%>
+<%= paginate @user_questions_array %>
+<%= page_entries_info @user_questions_array %>
+<%@user_questions_array.each do |questions|%>
+<%question = questions['question']%>
+    <div class="card mb-2 row " id="genecontroller">
+        <div class="card-header border-0 ">
+           <div class="row">
+             <div class="col-8">
+             
+                <p><%=link_to "#{question["title"]}", question_path(question['id']), html_options = {:class => ""}%></p>
+            </div>
+            <div class="col-4">
+            
+                <% if question["question_answered"] == false %>
+                <p class="btn btn-outline-info">This Question has not been answered</p>
+                <%else%>
+                <p class="btn btn-outline-success">This Question has been answered</p>
+                <%end%>
+            </div>
+           </div>
+        </div>
+    </div>
+<%end%>
+</div>
+
+

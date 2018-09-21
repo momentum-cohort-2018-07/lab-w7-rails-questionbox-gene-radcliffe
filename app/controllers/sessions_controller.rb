@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: [:create, :destroy, :login]
   def login
     if session[:user_id]
       redirect_to welcome_index_path

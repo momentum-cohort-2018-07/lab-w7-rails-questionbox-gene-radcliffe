@@ -4,8 +4,95 @@
     createQuestion();
     login();
     signup();
+    update();
+    
+    search();
     });
 
+    function search(){
+       console.log("search")
+       var tok = $('#token').val() 
+       var ret = "Bearer " + tok;
+        $('#sub_btn_search').click(function(e){
+            e.preventDefault()
+            var search = $('#search').val();
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:3007/api/v1/search/",
+                dataType: 'json',
+                data:   {search: {query: search}},
+                beforeSend: function (xhr){ 
+                    xhr.setRequestHeader('Authorization', ret); 
+                },
+                success: function (data, status, jqxhr){
+                    
+                        if(status == "success"){
+                           
+                            showSearch(data)
+                            //window.location.replace("http://localhost:3000/search/") 
+                        }
+                  
+                }
+
+    
+            })
+        })
+
+    }function showSearch(questions){
+        alert("success")
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/searches/",
+            dataType: 'json',
+            data: questions,
+            complete: function (jqXHR, status){
+                alert("hi")
+               // window.location.replace("http://localhost:3000/welcome/index")
+            }     
+        })
+    }
+
+    function update(){
+        var tok = $('#token').val() 
+        var ret = "Bearer " + tok;
+        var questionid = $('#question_id').val();
+        
+        var userid = $('#userid').val();
+        
+        $('#sub_btn_edit_question').click(function(e){
+            e.preventDefault()
+            var title = $('#title').val();
+            var body = $('#body').val();
+            $.ajax({
+                type: "PATCH",
+                url: "http://localhost:3007/api/v1/users/"+ userid + "/questions/"+ questionid,
+                dataType: 'json',
+                data:   {question: {title: title,
+                                body: body}},
+                beforeSend: function (xhr){ 
+                    xhr.setRequestHeader('Authorization', ret); 
+                },
+                success: function (data, status, jqxhr){
+                        if(data.status == "ok"){
+                            window.location.replace("http://localhost:3000/questions/"+questionid) 
+                        }
+                  
+                }
+
+    
+            })
+        })
+    }
+    function notifyMe(){
+   
+        $.notify({
+            // options
+            message: 'Hello World' 
+        },{
+            // settings
+            type: 'danger'
+        });
+    }
     function displayWarning(errors){
        
         var warningDiv = document.createElement("div")
@@ -74,7 +161,7 @@
     function createQuestion(){
         $('#sub_form_question').submit(function(e){
             e.preventDefault();
-            
+           
             var tok = $('#token').val() 
            // var hash = window.btoa(tok);
             var ret = "Bearer " + tok;
@@ -186,7 +273,7 @@
                 }
             });
     })
-    }
+}
   
 
 

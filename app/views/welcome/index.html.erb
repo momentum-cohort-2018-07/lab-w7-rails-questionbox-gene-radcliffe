@@ -1,12 +1,36 @@
-
+<div class="col-12">
+<div class="form-row">
+    <%=hidden_field_tag :param_name, session[:user_id], {:id => 'userid', :name => 'userid'}%>
+    <%=hidden_field_tag :param_token, session[:token], {:id => 'token', :name => 'token'}%>
+    <div class="col-sm-1 ">
+         <div class="form-control border-0 bg-info row"> 
+            <%=label_tag "Search" %>
+        </div>
+    </div>
+    <div class="col-10">
+         <div class="form-control form-text-area row"> 
+            <%=text_field_tag :search %>
+        </div>
+    </div>
+     <div class="col-1">
+          
+            <%=button_tag "search", class: "btn btn-primary btn-small", id:"sub_btn_search"  %>
+        
+    </div>
+</div>
+</div>
 <div class="container pt-5">
 
 
-  <%@questions.each do |questions|%>
+<%@questions_array = Kaminari.paginate_array(@questions).page(params[:page]).per(10)%>
+<%= paginate @questions_array %>
+<%= page_entries_info @questions_array %>
+
+  <%@questions_array.each do |questions|%>
   <%question = questions['question']%>
-    <div class="card border-info mb-5">
+    <div class="card border-info mb-5 " id="genecontroller">
         <div class="card-header badge-primary">
-            <h4><%=question["title"]%></h4>
+            <h4><%=link_to "#{question["title"]}", question_path(question['id']), html_options = {:class => "badge-primary"}%></h4>
         </div>
         <div class="card-body ">
             <div class="row">

@@ -67,7 +67,9 @@ gem 'jquery-rails'
 gem 'rack-cors', require: 'rack/cors'
 gem 'httparty'
 gem 'kaminari'
-
 gem 'carrierwave_direct'
 gem "aws-sdk-s3", require: false
 gem 'fog-aws'
+gem "figaro" # helps hide keys and data by using yml and env
+
+
