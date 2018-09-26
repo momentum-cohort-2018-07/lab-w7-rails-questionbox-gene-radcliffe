@@ -1,0 +1,27 @@
+<div class="mr-1">                                      
+<%= form_for :question, :method => 'post',  html: {id: 'sub_form_question'},remote: true do %>
+    <div class="form-group"> 
+        <%=hidden_field_tag :param_name, session[:user_id], {:id => 'userid', :name => 'userid'}%>
+        <%=hidden_field_tag :param_token, session[:token], {:id => 'token', :name => 'token'}%>
+        <%=hidden_field_tag :param_publish_date, Time.now, {:id => 'publishdate', :name => 'publishdate'}%>
+
+        <div class="form-control border-0"> 
+            <%=label_tag :title %>
+        </div>
+        <div class="form-control form-text border-0"> 
+            <%=text_field_tag :title %>
+        </div>
+    </div>
+    <div class="form-group form-textarea"> 
+        <div class="form-control border-0"> 
+            <%=label_tag :body%>
+        </div>
+        <div class=""> 
+            <%=text_area_tag :body, nil, rows: 10,cols: 50 %>
+        </div>
+    </div>
+     <div class="form-group"> 
+        <%=submit_tag "Create", class: "btn btn-primary btn-small", id:"sub_btn_ask"  %>
+    </div>
+<% end %>
+</div>

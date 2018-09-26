@@ -1,0 +1,22 @@
+<div class="container">
+<div class="form-group">
+<%= form_for :signup,:method => 'post',  html: {id: 'sub_form_signup'},remote: true do %>
+    <div class="form-control form-control-lg"> 
+        <%=label_tag :email %>
+        <%=text_field_tag :email %>
+    </div>
+    <div class="form-control form-control-lg"> 
+        <%=label_tag :username %>
+        <%=text_field_tag :username %>
+    </div>
+     <div class="form-control form-control-lg"> 
+        <%=label_tag :password %>
+        <%=password_field_tag :password%>
+    </div>
+    <%=submit_tag "Create", class: "btn btn-primary btn-small", id:"sub_btn_create"  %>
+<% end %>
+</div>
+<section id="signup-error" class="d-none">
+</section>
+</div>
+
